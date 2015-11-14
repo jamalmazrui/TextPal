@@ -1,0 +1,1660 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for Windows (vers 25 March 2009), see www.w3.org">
+
+  <title>TextPal</title>
+</head>
+
+<body>
+  <p>Version 3.9<br>
+  December 3, 2007<br>
+  Copyright 2006 - 2007 by Jamal Mazrui<br>
+  Modified GPL License</p>
+
+  <h1>Contents</h1>
+
+  <ul>
+    <li><a href="#A1">Description</a></li>
+
+    <li><a href="#A2">Installation</a></li>
+
+    <li><a href="#A3">Introduction</a></li>
+
+    <li><a href="#A4">Navigating Text</a></li>
+
+    <li><a href="#A5">Inserting Text</a></li>
+
+    <li><a href="#A6">Deleting Text</a></li>
+
+    <li><a href="#A7">Selecting Text</a></li>
+
+    <li><a href="#A8">Querying Text</a></li>
+
+    <li><a href="#A9">Topical Sections</a></li>
+
+    <li><a href="#A10">Programming Aids</a></li>
+
+    <li><a href="#A11">Miscellaneous Tips</a></li>
+
+    <li><a href="#A12">Hot Key Summary</a></li>
+
+    <li><a href="#A13">Development Notes</a></li>
+  </ul>
+
+  <h1><a name="A1">Description</a></h1>
+
+  <p>TextPal is a full featured text editor that is friendly, powerful,
+  and open source. It uses a standard Windows interface for an
+  application that supports multiple document windows. It seeks to
+  optimize efficiency for users of the JAWS or Window-Eyes screen
+  readers by automatically verbalizing relevant information. If neither
+  JAWS or Window-Eyes are detected in memory, TextPal uses the default
+  SAPI voice, if available, which may be configured via the Speech
+  applet in Control Panel.</p>
+
+  <p>If less verbosity is preferred, however, additional messages may
+  be turned off via the Extra Speech Toggle, Control+Shift+X -- a
+  setting remembered from one TextPal session to another. When off,
+  TextPal redirects the messages to a file called speech.log in the
+  TextPal program folder. Since this file may contain information not
+  otherwise available, it may be easily opened in a new window via the
+  Extra Speech Log command, Alt+Shift+X. So it does not grow
+  indefinately, however, it is deleted at the start of each TextPal
+  session.</p>
+
+  <h1><a name="A2">Installation</a></h1>
+
+  <p>The installation program for TextPal is called palsetup.exe. When
+  executed, it prompts for a program folder, the default being</p>
+
+  <p>C:\Program Files\TextPal</p>
+
+  <p>The installer creates a program group for TextPal on the Windows
+  start menu, containing choices to launch TextPal, read Documentation,
+  and uninstall. Additional choices either set or clear an association
+  between TextPal and the .txt extension within Windows Explorer. Other
+  file types may also be opened from there and converted to text by
+  choosing the Send To TextPal option on the context menu (e.g.,
+  invoked with Shift+F10).</p>
+
+  <p>Although the TextPal program group includes a shortcut for .txt
+  file association, the standard file association mechanisms of Windows
+  Explorer or My Computer may also be used, e.g., the Open With command
+  from the context menu, or the File Types dialog from the Tools/Folder
+  Options menu. This permits extensions other than .txt to be
+  associated with TextPal. Extensions TextPal recognizes -- like .pdf
+  or .ppt -- would then automatically be converted to text when opened.
+  Other extensions that are essentially text format may also be
+  convenient to associate with TextPal, such as programming code in .cs
+  (C Sharp) or .py (Python) files when TextPal is being used as a code
+  editor.</p>
+
+  <p>If TextPal does not appear in the list of programs to associate
+  with an extension, choose the Other button and then specify the full
+  path of the executable file TextPal.exe. Its default location is</p>
+
+  <p>C:\Program Files\TextPal\TextPal.exe</p>
+
+  <p>Technically, this executable is just a loading mechanism for the
+  Ruby language interpreter for Windows, rubyw.exe, together with a
+  parameter for the script file to be executed, TextPal.rbw. The
+  TextPal.exe wrapper simplifies the command line for running TextPal,
+  making it launch like other, stand-alone Windows applications. The
+  TextPal installer also defines the name TextPal.exe as an alias for
+  its full path in the Windows registry. This allows the name to be
+  recognized by the Windows Run command, and to be used as the editor
+  setting within file mannager programs like PowerDesk, ExplorerPlus,
+  or FileDir.</p>
+
+  <p>By default, the TextPal installer creates a desktop shortcut with
+  a hot key, enabling TextPal to be conveniently launched by pressing
+  Alt+Control+T. If this hot key happens to conflict with an existing
+  one, navigate to the TextPal item on the desktop, press Alt+Enter for
+  properties, and then change the hot key to something else (or leave
+  it blank).</p>
+
+  <p>After installing TextPal, the setup program presents a list of two
+  checkboxes that are on by default. The first checkbox offers an an
+  optional set of JAWS scripts to fine tune speech in a few ways that
+  could not be accomplished otherwise. For example, reading by
+  paragraph may be done with Control+Numpad5 (Center key) for the
+  current paragraph, Control+DownArrow for the next one, or
+  Control+UpArrow for the previous one. Default JAWS scripts intercept
+  these keys for other purposes (opening and closing a drop down
+  combobox). Primarily, these scripts suppress the often unnecessary
+  verbalization of keystroke names, such as &quot;Shift F8,&quot;
+  leaving just the command name if appropriate, such as &quot;Complete
+  selection.&quot; If the scripts were installed and you would later
+  prefer default JAWS behavior instead, however, you can do this by
+  pressing JAWSKey+0 when TextPal is active, and down arrowing to the
+  following line:</p>
+
+  <p>;SwitchToConfiguration(&quot;default&quot;)</p>
+
+  <p>Delete the initial semicolon character (;), which uncomments the
+  code, and then press Control+S to save and recompile the scripts.
+  Press Alt+F4 to exit JAWS script manager.</p>
+
+  <p>If you prefer not to install the JAWS scripts in the first place,
+  e.g., because you are a Window-Eyes or HAL user, press Spacebar to
+  uncheck that option of the setup program. The second checkbox in the
+  list, available via DownArrow, offers to assign Alt+Control+T as a
+  system-wide key for activating the TextPal shortcut on the Windows
+  desktop. A third checkbox opens TextPal documentation in the default
+  web browser (usually Internet Explorer).</p>
+
+  <p>TextPal may be safely installed over previous versions. The About
+  option from the Help menu, or Alt+F1 key, indicates the current
+  version number and release date. The History option, Shift+F1,
+  summarizes product changes.</p>
+
+  <h1><a name="A3">Introduction</a></h1>
+
+  <p>TextPal works like NotePad so you can begin using it with the same
+  commands. Many more commands are also defined, generally involving a
+  modifier key like Shift,Control, or Alt in combination with a letter
+  that begins the name of the command. Most commands provide enhanced
+  verbalizations compared to default screen reader speech, e.g.,
+  automatically reading the current line after a command completes. In
+  general, TextPal does not limit the size of a file or the number of
+  files open.</p>
+
+  <p>Launch TextPal with the desktop shortcut key Control+Alt+T. When
+  running, some Help menu options, with associated hot keys, may
+  provide useful assistance. F1 opens this documentation in the default
+  web browser. Alt+Shift+F1 opens a TextPal tutorial. Alt+Shift+H opens
+  a list of hot keys in a new TextPal window. Control+F1 opens a sample
+  file of structured text, and Control+Shift+F1 opens a sample
+  definition of a massage operation. These files serve as learning aids
+  since you can practice techniques just after reading about them in
+  another window.</p>
+
+  <p>The large number of hot keys available may seem overwhelming at
+  first. They are also available as menu items, however, so they may be
+  memorized according to need and frequency of use. The menus group
+  commands by conceptual category. Related key combinations are listed
+  together within these categories. Explore or review the menus at any
+  time: File, Edit, Delete, Navigate, Query, Misc, Window, and Help.
+  You can also avoid the problem of deciding which menu to try for a
+  command by invoking the Alternate Menu, Alt+F10, which presents all
+  TextPal menu options in a single, alphabetized list.</p>
+
+  <p>Press Control+N to start a new file, Control+O to open an existing
+  one, Control+P to print it, or Control+S to save it. Use the Save As
+  command, Control+Shift+S, to save under a new name, or the Save Copy
+  command, Alt+Shift+S, to save a copy without changing the current
+  name. If you do not specify a file extension, .txt will be added by
+  default. This extension may be configured with the Settings command,
+  Alt+S (leave blank for no default extension). In general, TextPal
+  does a directory change to each file opened or saved, but the Save
+  Copy command is an exception so that you can keep the current
+  directory for other purposes.</p>
+
+  <p>Control+Shift+N starts a new file with the current clipboard text.
+  Alt+O opens the current file again, restoring the version on disk.
+  Press Control+Tab to cycle among current TextPal windows. You can
+  also pick a window from a list invoked with F4. Press Control+F4 to
+  close the current window, or Alt+F4 to exit the application.</p>
+
+  <p>Several file types, recognized by extension, may be opened as text
+  after an automatic conversion process. These are Microsoft Word
+  (.doc), Excel (.xls), PowerPoint (.ppt), Adobe Portable Document
+  Format (.pdf), Rich Text Format (.rtf), Windows help (.hlp), and
+  Hypertext Markup Language (.htm or .html). If a file is opened with a
+  recognized, non-text extension, TextPal tries to create a temporary,
+  plain text version with the same name but a .txt extension. If
+  successful, TextPal opens this version instead. If not, it reverts to
+  loading the original file. In doing conversions, TextPal uses an
+  external utility that is optimized for quick extraction but not
+  refined formatting of text. Some conversions require Windows 2000 or
+  above.</p>
+
+  <p>In case you want to open a non .txt extension without a conversion
+  being attempted, press Control+Shift+O rather than Control+O. This
+  may be useful for editing an HTML file, for example.</p>
+
+  <p>A file may also be opened by picking it from a list: F4 for
+  Current Files, Alt+R for recent files, or Alt+L to list favorites. To
+  add the current file to the list of favorites, press Control+L, or to
+  remove it from that list press Control+Shift+L. When a favorite file
+  is picked, it is not automatically converted to text because TextPal
+  assumes it is already in the format you want. Yet another list is
+  available with the File Find command, Alt+Shift+F, showing files in
+  the current working directory that contain a string you specify.
+  Since searching a folder with many files can mean a noticeable delay,
+  TextPal saves the list of results so it may be quickly presented
+  again if the same search is repeated by pressing Enter at the prompt.
+  In this situation, TextPal also sets the default choice in the list
+  to be the file after the one last chosen. To list all files in the
+  current directory, leave the search string completely blank. This
+  command presents files in reverse chronological order, so those most
+  recently modified appear first in the list.</p>
+
+  <h1><a name="A4">Navigating Text</a></h1>
+
+  <p>Combinations involving the K key follow a similar pattern to that
+  of the L key. Control+K sets a bookmark, and Control+Shift+K clears
+  it. A file may have any number of bookmarks. Press Alt+K to go to a
+  bookmark. If the file has more than one, TextPal prompts you to
+  choose from a list of bookmarked lines of text. The default choice is
+  the next bookmark ahead in the file, or the first one if none is
+  ahead. When a file is opened, TextPal automatically goes to the last
+  bookmark if at least one is found. Bookmarked files are also
+  considered to be favorite files, which may be listed with Alt+L. To
+  quickly clear many bookmarks in a file, you can clear it as a
+  favorite with Control+Shift+L.</p>
+
+  <p>Press Control+F to find text in the forward direction from the
+  current cursor position. The capitalization of the text you enter
+  does not matter. Press F3 to forward find again. Similarly, press
+  Control+Shift+F to find text in the reverse, direction or Shift+F3 to
+  reverse find again. You can also press Control+F3 to search forward
+  for the word at the cursor position, or Control+Shift+F3 to search
+  backward. If text is selected, it will be used as the match string
+  instead of the current word.</p>
+
+  <p>A search string may include common nonprinting characters by means
+  of the following (lower case) tokens: \r for carriage return (ASCII
+  13), \n for line feed (ASCII 10), \f for form feed (ASCII 12), and \t
+  for tab (ASCII 9). The availability of these tokens, however, comes
+  at a price: a backslash character (\) that is not part of a token
+  must be doubled (\\), e.g., when searching for a file path.</p>
+
+  <p>Although TextPal saves a file with standard Windows line breaks
+  denoted by a pair of carriage return and line feed characters, a
+  single line feed character is used within the editing environment,
+  itself. Thus, you can search for text at the beginning or end of a
+  line by using the \n token.</p>
+
+  <p>Press Control+J to jump to a line by number, either absolute or
+  relative, indicated by a plus or minus prefix. The prompt also
+  accepts an optional column number after a comma. For example,
+  entering 3,5 would jump to line 3, column 5. Entering +50 would jump
+  ahead 50 lines. Press Alt+J to jump again, using the same input value
+  as before.</p>
+
+  <p>Similarly, press Control+G to go to a percentage point in the
+  file, or Alt+G to go again. For example, if you enter +10 as the Go
+  to value, then successive presses of Alt+G will go forward by 10%
+  increments in the file.</p>
+
+  <p>Press F9 to go to the next paragraph and read it, or Shift+F9 for
+  the previous one. A paragraph division is defined as two line feeds
+  with any amount of intervening &quot;white space,&quot; such as
+  space, tab, or form feed characters. Press Alt+F9 to hear the current
+  paragraph, which is considered to be text between the cursor position
+  and the next paragraph. The Delete Paragraph command,
+  Control+Shift+D, would remove the same text. Control+DownArrow or
+  Control+UpArrow will also go to the next or previous paragraph.</p>
+
+  <p>Press Alt+DownArrow or Alt+UpArrow to go to the next or previous
+  sentence (with JAWS, TextPal scripts must be installed to over-ride
+  default key assignments that interfere with these commands). A
+  sentence is defined as text ending with a period, question mark, or
+  exclamation mark followed by any number of punctuation symbols. Press
+  Alt+RightArrow or Alt+LeftArrow to go to the next or previous chunk.
+  A chunk is defined as a sequence of nonblank characters. It is
+  usually, but not always, the same as what Control+RightArrow or
+  Control+LeftArrow consider to be a word, since these keys stop at
+  some punctuation symbols.</p>
+
+  <h1><a name="A5">Inserting Text</a></h1>
+
+  <p>Press Control+R to replace text based on a search--case does not
+  matter. Press Control+Y to repeat the current line of text. You can
+  be anywere within the line, and the cursor will be moved to the
+  beginning of the next, repeated line. Control+Y is commonly used as a
+  Redo command, but in this case, it is Repeat. Redo is accomplished by
+  Control+Shift+Z instead: the reverse of the Undo command,
+  Control+Z.</p>
+
+  <p>Press Control+Semicolon to insert the current date and time (you
+  can mentally associate this key with the colon character (:) used in
+  time values). Press Alt+Semicolon to hear the time without inserting
+  it. The default date/time format is like the following:</p>
+
+  <p>Monday, January 15, 2007 at 6:54 AM</p>
+
+  <p>You can change the format in the Settings dialog with (Ruby
+  language) tokens described as follows:</p>
+
+  <p>%a = abbreviated weekday name, e.g., Sun</p>
+
+  <p>%A = full weekday name, e.g., Sunday</p>
+
+  <p>%b = abbreviated month name, e.g., Jan</p>
+
+  <p>%B = full month name, e.g., January</p>
+
+  <p>%c = preferred local date and time representation</p>
+
+  <p>%d = day of month, 1 - 31</p>
+
+  <p>%H = hour of day, 24-hour clock, 0 - 23</p>
+
+  <p>%I = hour of day, 12-hour clock, 1 - 12</p>
+
+  <p>%j = day of year, 1 - 366</p>
+
+  <p>%m = month of year, 1 - 12</p>
+
+  <p>%M = minute of hour, 0 - 59</p>
+
+  <p>%p = Meridian indicator, AM or PM</p>
+
+  <p>%S = second of minute, 0 - 60</p>
+
+  <p>%U= Week number of current year, starting with first Sunday as
+  first day of first week, 0 - 53</p>
+
+  <p>%W = week number of current year, starting with first Monday as
+  first day of first week, 0 - 53</p>
+
+  <p>%w = day of week, where Sunday is 0, 0 - 6</p>
+
+  <p>%x = preferred representation for date alone, no time</p>
+
+  <p>%X = preferred representation for time alone, no date</p>
+
+  <p>%y = year without century, 0 - 99</p>
+
+  <p>%Y = year with century</p>
+
+  <p>%Z = time zone name</p>
+
+  <p>%% = literal % character</p>
+
+  <p>Use the Evaluate Expression command, Control+E (or Control+Equals
+  with the JAWS scripts), to compute the result of a mathematical
+  expression on the current line or in selected text. The result is
+  placed on the next line and automatically read. Available symbols
+  include + for addition, - for subtraction, * for multiplication, /
+  for division, ** for exponentiation, and % for modulus. Almost any
+  expression of the Ruby programming language may be evaluated
+  (explaining the possibilities is beyond the scope of this
+  documentation). TextPal also offers a custom function for date
+  calculations. Here are some examples:</p>
+
+  <p>(9.98 * 7) + 20</p>
+
+  <p>89.86</p>
+
+  <p>3 ** 4</p>
+
+  <p>81</p>
+
+  <p>7.0 / 3</p>
+
+  <p>2.33333333333333</p>
+
+  <p>7 / 3</p>
+
+  <p>2</p>
+
+  <p>7 % 3</p>
+
+  <p>1</p>
+
+  <p>date(2006, 12, 25)</p>
+
+  <p>Monday, December 25, 2006</p>
+
+  <p>date(2007, 11, 4, &quot;Thursday&quot;)</p>
+
+  <p>Thursday, November 23, 2006</p>
+
+  <p>Since 7.0 is a decimal number, the result of the division is
+  decimal. On the other hand, 7 is an integer, so the result is also an
+  integer. The Christmas example took three numeric parameters for
+  year, month, and day. The Thanksgiving example took three numeric
+  parameters for year, month, week, and one string parameter for
+  day.</p>
+
+  <h1><a name="A6">Deleting Text</a></h1>
+
+  <p>Several commands help you delete text efficiently. As usual, press
+  Control+Delete to delete the current word in the forward direction,
+  or Control+Backspace for the reverse direction. Other commands make
+  use of the forward slash key (/) (think of slashing as deleting).
+  press Control+Slash to delete from the cursor to the end of the
+  current line, or Control+Shift+Slash to delete to the start of it.
+  Using the Alt rather than Control modifier deletes by larger amounts.
+  Press Alt+Slash to delete to the bottom of the file, or
+  Alt+Shift+Slash to delete to the top.</p>
+
+  <p>To delete the current line, press Control+D. To delete the current
+  paragraph, press Control+Shift+D. A paragraph is defined as text
+  separated by at least two presses of the Enter key (creating a blank
+  line). To delete all text in the document, press Control+Shift+F8
+  (the reverse of Control+F8, which copies all text to the
+  clipboard).</p>
+
+  <h1><a name="A7">Selecting Text</a></h1>
+
+  <p>Several commands facilitate selection and clipboard operations.
+  There are the standard Control+C for copy, Control+X for cut, and
+  Control+V for paste. Control+A selects all, and Control+Shift+A
+  removes any selection. As usual, text may be selected with the Shift
+  and arrow keys. The number of characters currently selected is shown
+  on the status bar. Also shown is whether TextPal thinks text has been
+  modified since the last save operation. After copying to the
+  clipboard, TextPal clears the selection so that typing a character
+  does not accidentally replace text.</p>
+
+  <p>If no text is selected, Control+C and Control+X conveniently
+  assume the current line. Alt+C and Alt+X also cut and copy, but
+  append to the clipboard rather than replacing it. Use the Quote
+  Clipboard command, Alt+&#39;, to review the current clipboard
+  text.</p>
+
+  <p>Control+V does the standard paste operation. Control+Shift+V
+  prompts for a file to paste into the document at the current cursor
+  position. TextPal also supports a snippet feature for pasting
+  re-usable text. A snippet is a text file stored in a subfolder of the
+  TextPal program folder, by default in</p>
+
+  <p>C:\Program Files\TextPal\Snippet</p>
+
+  <p>Press Alt+Shift+C to copy all or selected text into a snippet.
+  TextPal prompts for a name, defaulting to the current window title
+  with a .txt extension, and saves it to a file in this folder. Use the
+  Paste snippet command, Alt+Shift+V, to pick from the list of
+  available snippets. Press Alt+V to view the snippet folder in Windows
+  Explorer, where you can browse, rename, or delete snippet files. In
+  addition, Alt+Backslash opens Windows Explorer in the folder of the
+  current file, and Control+Backslash opens a command prompt there.</p>
+
+  <p>Another way of selecting text is to press F8 to mark the start of
+  a selection. Then, move to the desired end point by any means, e.g.,
+  arrow or search commands. Press Shift+F8 to complete the selection,
+  selecting all text between the start and end points. Note that the
+  cursor should be moved one character past the text to be included in
+  the selection before pressing Shift+F8. You can press Shift+Space to
+  review the current selection, e.g., before copying, cutting, or
+  deleting it. Alt+Shift+F8 returns to the start point.</p>
+
+  <p>The F8 key is also part of a single command to copy the whole
+  document to the clipboard, accomplished with Control+F8. At the other
+  end of the size spectrum is a concept called a chunk of text. It is
+  defined as a string of text surrounded by white space, such as a
+  space, tab, carriage return, or line feed character. Press
+  Shift+BackSpace to hear the chunk at the cursor position. Press
+  Control+Space to select the current chunk of text. If text is already
+  selected, this command extends the selection to the next chunk. Press
+  Shift+Space to review selected text.</p>
+
+  <h1><a name="A8">Querying Text</a></h1>
+
+  <p>Several commands provide verbal output without changing the file.
+  Use the Address command, Alt+A, to hear the current cursor position,
+  including line, column, and percent through. Press Alt+Z for Status,
+  which gives more status information, such as the word wrap setting,
+  number of characters selected, and whether TextPal thinks the
+  document has been modified since it was last saved to disk. You can
+  mentally associate Z with the bottom of both the alphabet and
+  screen--where the status line is located.</p>
+
+  <p>Press Alt+P to review the complete path of the file, since only
+  the base name is shown in the window title. Press Alt+Y for Yield,
+  which reports the total number of lines and characters in all or
+  selected text. Press Control+Shift+Y to hear the length of the widest
+  line.</p>
+
+  <p>Press Alt+Enter to hear text ahead of the cursor, or
+  Alt+Shift+Enter to hear text prior to it. Press Alt+F8 to hear the
+  whole document. As previously mentioned, Alt+Apostrophe says the
+  clipboard, Alt+Semicolon says the current time, Shift+Space says
+  selected text, and Shift+BackSpace says the current chunk.</p>
+
+  <h1><a name="A9">Topical Sections</a></h1>
+
+  <p>To provide structure to plain text, a file may be divided into
+  sections by a combination of page and line break characters (a
+  sequence of ASCII 12, 13, and 10). Since these are nonprinting
+  characters, TextPal also inserts a line of 10 dashes before them when
+  creating a section break with Control+Enter. The next line of text is
+  then assumed to be the topic heading of a new section.</p>
+
+  <p>When a document is divided into sections in this manner, you can
+  press Control+PageDown to go to the next section and read its
+  heading, or Control+PageUp to go to the previous one. The first
+  section may function as a table of contents by containing a list of
+  headings of subsequent sections. pressing F6 on a topic name in the
+  table of contents will jump to the heading of the corresponding
+  section in the body. Shift+F6 does the reverse, jumping from a
+  section in the body back to the topic name in the table of contents.
+  This is similar to the use of F6 and Shift+F6 when navigating a
+  compiled HTML help file (.chm format). If the cursor is within a
+  section in the body of the document, you can press Alt+T to hear its
+  topic name/heading.</p>
+
+  <p>You can also search for a topic with Control+F6, specifying any
+  substring of the heading. Alt+F6 searches again, like the keyboard
+  pattern of Alt+J for Jump Again and Alt+G for Go to Again. (Due to a
+  technical issue, Control+F6 is mentioned incorrectly on the Window
+  menu as a command to cycle to the next open window, but Control+Tab
+  is actually used for that instead.)</p>
+
+  <p>The Help menu includes the Sample Structured Text command,
+  Control+F1, which loads a file for practicing these section
+  navigation techniques.</p>
+
+  <h1><a name="A10">Programming Aids</a></h1>
+
+  <p>Press Tab to indent the current line of text, or Shift+Tab to
+  outdent it. If multiple lines of text are selected, these commands
+  are applied to all of them. Press Alt+I to hear the number of
+  indentation levels of the current line. The Trim Blanks command,
+  Control+Shift+Enter, removes all indentation and trailing spaces at
+  once, as well as removing more than two consecutive blank lines (when
+  multiple lines are selected).</p>
+
+  <p>Press Alt+Shift+I to toggle a mode in which you are alerted to
+  changes in indentation level when using the up and down arrow keys.
+  TextPal will say how many levels in or out the indentation has
+  changed when using the up and down arrow keys. This mode also
+  reverses the rols of the Enter and Shift+Enter keys.</p>
+
+  <p>When Indent Mode is off, you can start a new line of text with the
+  same indentation as the current one by pressing Shift+Enter. By
+  default, a level of indentation is two spaces. This and other
+  configuration settings may be changed with the Settings command,
+  Alt+S (or use Alt+Shift+M to manually edit settings in the
+  TextPal.ini file). To go to the first character of the current line
+  after any indentation, press Alt+Home. To go to the last non-white
+  space character, press Alt+End.</p>
+
+  <p>Press Control+I to go to the next code block, or Control+Shift+I
+  to go to the previous one. TextPal considers a line of text with less
+  indentation to be part of a different code block. For example, if the
+  cursor is inside a loop block, then Control+I will go to the line at
+  the closing of the loop where a lower level of indentation resumes.
+  In Ruby, this would be the line with the word &quot;end&quot; or a
+  right brace (}) character. In Python, it would be the first line of
+  code following the loop, since the change in indentation, itself,
+  indicates the end of the loop.</p>
+
+  <p>The Quote and Unquote commands, Control+Q and Control+Shift+Q, may
+  be used to add or remove comment symbols at the beginning of lines of
+  programming code. Use the Settings command, Alt+S, to change the
+  default comment character from &gt; to one appropriate for the
+  language in use, e.g., &#39; for Visual Basic, * for Xbase, ; for
+  AutoIt, or # for Ruby. If the cursor is on one of these characters
+  when such a command is invoked, that character will be used
+  regardless of the current setting. A sequence of more than one
+  character may actually be configured for commenting, e.g., // for the
+  C language.</p>
+
+  <p>Press Control+U to upper case the current character or selected
+  text. Control+Shift+U converts to lowercase instead. Alt+U converts
+  to proper case: capitalizing the initial letter of each word and
+  lower casing the rest--except for names like McCartney. Alt+Shift+U
+  inverts the case of characters: changing upper to lower case, and
+  vice versa.</p>
+
+  <p>Curly brace characters delimit code structures in a number of
+  languages. Press Control+B to find the matching right brace (})
+  character from the current location. Press Control+Shift+B for the
+  matching left brace ({) instead. Press Alt+B to hear the number of
+  unmatched left braces before the cursor and right braces after. Use
+  the Settings command, Alt+S, to configure different brace characters,
+  e.g., angle brackets (&lt;&gt;) for editing HTML or XML. If the
+  cursor is on a brace-type character when issuing one of these
+  commands, i.e., one of {}&lt;&gt;[]() , then TextPal uses that
+  character and its opposite when searching, regardless of the current
+  setting.</p>
+
+  <p>A scripting language allows a program to be run as a text file
+  associated by extension with its interpreter, e.g., .pl for Perl,
+  .au3 for AutoIt, and .rbw for Ruby files. Press F5 to run the current
+  file with its associated interpreter. If the current file name has a
+  complete path, TextPal saves to disk before running the file to
+  ensure the latest version is being used. Otherwise, TextPal saves to
+  a file in a temporary folder and runs that file.</p>
+
+  <p>If a programming language involves compilation of source code to
+  binary form, you can use the Run with Tool command, Alt+F5, to
+  compile the current file. This command may be configured in the
+  Settings dialog, invoked with Alt+S. By default, and to serve as an
+  example, it is configured to compile a C# program (from a .cs to a
+  .exe file). Another tool may be configured with the Run with Prompt
+  command, Alt+Shift+F5. By default, it is configured to create an
+  AutoIt executable (from a .au3 to a .exe file). This command may be
+  adjusted just before it is run.</p>
+
+  <p>These tool commands should begin with the full path to the
+  compiler enclosed in quotes. Any parameters may be specified
+  thereafter. Portions of the path to the file being edited may be
+  specified using the following tokens: %full_name% for the full path
+  and name, %dir_name% for the directory, %file_name% for the name
+  without the path, %root_name% for the root of the file name, and
+  %ext_name% for its extension. If %full_name is used, TextPal changes
+  to the folder containing the file before running the tool. Otherwise,
+  TextPal uses the folder containing the tool as the working directory.
+  This difference is illustrated by the C# versus AutoIt compilation
+  commands.</p>
+
+  <p>More than one command may actually be specified, where subsequent
+  ones are separated by a semicolon character (;). If the tool writes
+  messages to standard output, this text will be captured and displayed
+  in a message box upon completion (only the first of multiple commands
+  is treated this way). The first line and column position mentioned in
+  the output, if any, is assumed to be the position of a compilation
+  error in the source code. TextPal uses the ErrorPosition setting,
+  configurable in the Settings dialog, to find the position in the
+  output based on a regular expression, which is set for the C#
+  compiler by default. The regular expression should be defined so that
+  the first number of a matching string is the line number and the
+  second number, if any, is the column number. The Jump to Error
+  command, Alt+Shift+J, jumps to the saved position and announces the
+  line, column, and word there.</p>
+
+  <p>Another regular expression may be configured for navigating among
+  routines in source code. The NavigatePart setting is used by
+  Alt+PageDown and Alt+PageUp to go to the next or previous function,
+  method, or class definition.</p>
+
+  <p>The Compile command, Control+F5, combines debugging steps more
+  efficiently by compiling, saying output without a model message box,
+  and automatically jumping to the first error position, if found in
+  the output. The output spoken may be abbreviated by means of a
+  regular expression setting that specifies the pattern of text to
+  remove. The Pick Compiler command, Control+Shift+F5, lets you
+  conveniently configure the ToolCommand, AbbreviateOutput,
+  ErrorPosition, NavigatePart, and CommentCharacter ssettings for a
+  particular compiler or interpreter. TextPal offers settings for the
+  following programming languages: C#, JAWS Script, Java, Perl, PHP,
+  PowerBASIC, PowerShell, Python, Ruby, and Visual Basic .NET.</p>
+
+  <p>TextPal assumes that the Windows search path includes the folder
+  of a command-line compiler to be run (which may be added by editing
+  the Path environment variable in the Advanced tab page of the System
+  applet in Control Panel). Command line text may start with the @
+  symbol so that a leading quote mark is not lost by .ini file
+  manipulation functions of Windows. The text may end with the
+  2&gt;&amp;1 sequence to redirect the standard error streadm to
+  standard output.</p>
+
+  <p>In the case of PowerBASIC, a batch file is needed (in the TextPal
+  program folder), which refers to the default location of PowerBasic
+  for Windows version 8.0. The path to the JAWS script compiler is also
+  hard coded for the latest version. JAWS scripting is additionally
+  supported by TextPal&#39;s own scripts: Control+I is a hot key for
+  inserting the path to the user script folder, and Control+Shift+I is
+  for the All Users script folder, when focus is in the Open or Save
+  Dialog of TextPal.</p>
+
+  <p>Compiler settings are stored in the [Compilers] section of the
+  TextPal.ini file. Only the current compiler settings appear in the
+  Settings dialog, Alt+S. Other settings may be edited, however, using
+  the Manual Settings command, Alt+Shift+M. You can adjust command line
+  parameters of configured compilers, or add others. Installing a new
+  version of TextPal does not change existing compiler settings.</p>
+
+  <p>Sample &quot;Hello world&quot; programs in the above languages
+  (used for developing this feature) are available in the Sample
+  subfolder of the TextPal program folder. They are minimal code for
+  displaying a string of text either in a console window or message
+  box. Control+F11 opens the Sample folder in Windows Explorer.</p>
+
+  <p>Press Control+Shift+R to replace text based on a &quot;regular
+  expression.&quot; Press Control+Shift+C to count parts of text
+  matching a regular expression, or Control+Shift+E to extract and
+  place them in a new editing window. This command seperates matches by
+  the section break sequence--what is inserted by pressing
+  Control+Enter. The sequence may be partially configured with the
+  Settings command, Alt+S. Section navigation commands expect it to end
+  with a form feed and line feed (the default, preceding dashes are
+  optional).</p>
+
+  <p>For technical reasons, regular expression tokens in the
+  replacement string must be specified with an extra backslash
+  character, e.g., \\1 for text matching the first parenthesized group
+  in the search string. On the other hand, standard tokens available in
+  the regular Replace command, such as \n for a line ending, do not
+  need an extra backslash. An optional One may be used for consistency,
+  however, since these tokens are also recognized by the regular
+  expression interpreter.</p>
+
+  <p>Use the Massage Operation command, Control+Shift+M, to apply a
+  saved set of search and replace tasks to one or more files --
+  typically to massage data or formatting in predictable ways. TextPal
+  prompts for the file containing the regular expressions to apply.
+  Each task is defined by three lines: (1) a comment explaining the
+  operation, (2) the search expression, and (3) the replacement
+  expression. A blank line seperates each task. The current editing
+  window should contain the list of files to process, one per line. The
+  list could be typed manually or generated via the Path List command,
+  Control+Shift+P. A sample operation file, TrimLine.txt, may be opened
+  from the Help menu, or with Control+Shift+F1. It defines two tasks as
+  follows:</p>
+
+  <p>Remove leading space or tab characters from each line</p>
+
+  <p>\n( |\t)+</p>
+
+  <p>\n</p>
+
+  <p>Remove trailing space or tab characters from each line</p>
+
+  <p>( |\t)+\n</p>
+
+  <p>\n</p>
+
+  <p>Regular expressions are a large and complex topic. Web searches
+  (e.g., via google.com) will find many tutorials. There are variations
+  in regular expression syntax. The Ruby programming language, upon
+  which TextPal is based, uses the common POSIX syntax, which is
+  generally the same as that used by the Perl language and Microsoft
+  developer tools. At the time of this writing, links to a few
+  tutorials are as follows:</p>
+
+  <p>Learn How to Use Regular Expressions</p><a href=
+  "http://www.regular-expressions.info/tutorial.html">http://www.regular-expressions.info/tutorial.html</a><br>
+
+  <p>Learning to Use Regular Expressions</p><a href=
+  "http://gnosis.cx/publish/programming/regular_expressions.html">http://gnosis.cx/publish/programming/regular_expressions.html</a><br>
+
+  <p>Getting familiar with Regular Expressions</p><a href=
+  "http://64.233.161.104/search?q=cache:q4rGvOgCoD4J:articles.techrepublic.com.com/5100-6329-5055138.html+%22getting+familiar+with+regular+expressions%22&amp;hl=en&amp;gl=us&amp;ct=clnk&amp;cd=1">http://64.233.161.104/search?q=cache:q4rGvOgCoD4J:articles.techrepublic.com.com/5100-6329-5055138.html+%22getting+familiar+with+regular+expressions%22&amp;hl=en&amp;gl=us&amp;ct=clnk&amp;cd=1</a><br>
+
+  <p>A few Ruby/TextPal tips are as follows. When you intend a
+  punctuation character to be treated literally in a regular
+  expression, it is generally advisable to precede it with a backslash
+  character, since punctuation marks often have special meaning
+  otherwise. To match a forward slash, for example, use the \/
+  sequence.</p>
+
+  <p>Whether in the search or replacement expression, a matched,
+  parenthetical group should be referenced with a double backslash
+  before the numeric sequence of that group. For example, suppose the
+  search expression is as follows:</p>
+
+  <p>^((Function)|(Script))(.*?\n)</p>
+
+  <p>Then the following replacement expression will substitute
+  &quot;Method&quot; for either &quot;Function&quot; or
+  &quot;Script&quot; on lines beginning with those words:</p>
+
+  <p>Method\\4</p>
+
+  <p>Below is summary information from the Ruby quick reference
+  at</p><a href=
+  "http://www.zenspider.com/Languages/Ruby/QuickRef.html">http://www.zenspider.com/Languages/Ruby/QuickRef.html</a><br>
+
+  <p>regex characters:</p>
+
+  <p>. any character except newline</p>
+
+  <p>[ ] any single character of set</p>
+
+  <p>[^ ] any single character NOT of set</p>
+
+  <p>* 0 or more previous regular expression</p>
+
+  <p>*? 0 or more previous regular expression(non greedy)</p>
+
+  <p>+ 1 or more previous regular expression</p>
+
+  <p>+? 1 or more previous regular expression(non greedy)</p>
+
+  <p>? 0 or 1 previous regular expression</p>
+
+  <p>| alternation</p>
+
+  <p>( ) grouping regular expressions</p>
+
+  <p>^ beginning of a line or string</p>
+
+  <p>$ end of a line or string</p>
+
+  <p>{m,n} at least m but most n previous regular expression</p>
+
+  <p>{m,n}? at least m but most n previous regular expression(non
+  greedy)</p>
+
+  <p>\A beginning of a string</p>
+
+  <p>\b backspace(0x08)(inside[]only)</p>
+
+  <p>\b word boundary(outside[]only)</p>
+
+  <p>\B non-word boundary</p>
+
+  <p>\d digit, same as[0-9]</p>
+
+  <p>\D non-digit</p>
+
+  <p>\S non-whitespace character</p>
+
+  <p>\s whitespace character[ \t\n\r\f]</p>
+
+  <p>\W non-word character</p>
+
+  <p>\w word character[0-9A-Za-z_]</p>
+
+  <p>\z end of a string</p>
+
+  <p>\Z end of a string, or before newline at the end</p>
+
+  <p>(?# ) comment</p>
+
+  <p>(?: ) grouping without backreferences</p>
+
+  <p>(?= ) zero-width positive look-ahead assertion</p>
+
+  <p>(?! ) zero-width negative look-ahead assertion</p>
+
+  <p>(?ix-ix) turns on/off i/x options, localized in group if any.</p>
+
+  <p>(?ix-ix: ) turns on/off i/x options, localized in non-capturing
+  group.</p>
+
+  <p>special character classes:</p>
+
+  <p>[:alnum] alpha-numeric characters</p>
+
+  <p>[:alpha] alphabetic characters</p>
+
+  <p>[:blank] whitespace - does not include tabs, carriage returns,
+  etc</p>
+
+  <p>[:cntrl] control characters</p>
+
+  <p>[:digit] decimal digits</p>
+
+  <p>[:graph] graph characters</p>
+
+  <p>[:lower] lower case characters</p>
+
+  <p>[:print] printable characters</p>
+
+  <p>[:punct] punctuation characters</p>
+
+  <p>[:space] whitespace, including tabs, carriage returns, etc</p>
+
+  <p>[:upper] upper case characters</p>
+
+  <p>[:xdigit] hexadecimal digits</p>
+
+  <h1><a name="A11">Miscellaneous Tips</a></h1>
+
+  <p>Use the Text Convert command, Control+T, to convert a batch of
+  files to text from other formats. Place a list of file names in an
+  edit window by whatever means, e.g., pasting from the clipboard,
+  opening a file, typing them manually, or generating them with the
+  Path List command, Control+Shift+P. TextPal processes each line of
+  the document, and if the text identifies an existing file on disk,
+  the file will be converted to a text file with the same path and name
+  except for a .txt extension.</p>
+
+  <p>If a file name listed does not include a preceding path, the last
+  specified path is assumed. If no prior path is specified, the current
+  directory is assumed. Before converting, TextPal asks which file
+  extensions to process. Those it finds are separated by a space in an
+  input box. Delete any extensions to be skipped in the conversion
+  process.</p>
+
+  <p>The Text Convert with JAWS command, JAWSKey+Control+T, is an
+  alternative implementation via JAWS scripts and Microsoft Office. If
+  installed, better conversion results are available for .doc, .htm,
+  .html, .ppt, .rtf, and .xls file extensions.</p>
+
+  <p>Use the Text Combine command, Control+Shift+T, to combine
+  conversions into a new document, rather than into separate files on
+  disk. TextPal opens a new window containing the combination of files
+  seperated by the section break sequence. The phrase &quot;End of
+  Document&quot; is added at the bottom. This command is useful, for
+  example, after downloading multiple PDF or HTML files that you prefer
+  to consolidate into a single, sequenced document. Such a document may
+  be navigated with the section navigation and topic search commands.
+  You might press Control+PageDown to go to each section and ensure
+  that the first line is a useful heading. Then use the Text Contents
+  command, Alt+Shift+T, to add a table of contents at the top of the
+  document, where each item in the list is a section heading. This
+  command is also useful after manually creating a structured document
+  with the Section Break command, Control+Enter.</p>
+
+  <p>If you create a list of files, perhaps with help from the Path
+  List command, you can burn them to a CD by pressing Alt+Shift+B. A
+  dialog lets you choose the target drive and estimate space on the CD
+  before burning.</p>
+
+  <p>Another list may be generated with the Grab URLs command,
+  Alt+Shift+G. It prompts for a web page to analyze, defaulting to the
+  address of the current page in Internet Explorer -- if open and
+  permitted by its security configuration. A list of URLs found as link
+  references in the HTML of the page is placed in a new editing window,
+  with the URL of the page just analyzed at the top. The Web Download
+  command, Alt+Shift+W, retrieves Urls listed in the current window,
+  putting their files in the &quot;download&quot; folder of the TextPal
+  program folder, and then opening that location in Windows Explorer
+  (or opening it later with Alt+F11). The default location is</p>
+
+  <p>C:\Program Files\TextPal\download</p>
+
+  <p>A file to be downloaded may be listed without a preceding web site
+  path, in which case, the last specified path is assumed. For example,
+  the following lines would download three files from the Empowerment
+  Zone web site:</p><a href=
+  "http://www.EmpowermentZone.com/palsetup.exe">http://www.EmpowermentZone.com/palsetup.exe</a><br>
+
+  <p>p2tsetup.exe</p>
+
+  <p>ddsetup.exe</p>
+
+  <p>Before downloading, TextPal prompts for the file extensions to
+  include, so you can limit the download by erasing extensions of files
+  to skip. URL&#39;s without an extension or with one indicating HTML
+  content, such as .asp, are represented as .htm instead. A subsequent
+  confirmation informs you how many files match those extensions, so
+  you can have a sense of how long the download would take. At present,
+  there is not a smooth way of aborting a download in progress, though
+  pressing Alt+F4 may work.</p>
+
+  <p>Afterward, TextPal&#39;s current directory is set to the download
+  folder so that the Path List command, Control+Shift+P, may be used to
+  generate a list of downloaded files. You might then use the Text
+  Convert or Combine command, Control+T or Control+Shift+T, to produce
+  text from other downloaded formats.</p>
+
+  <p>If you want to ensure that a file contains only standard ASCII
+  characters (codes below 128), use the ASCII only command,
+  Alt+Shift+A. It operates on either all or selected text.</p>
+
+  <p>Press Control+H to convert the current file to HTML format in a
+  new window. A structured text file will be converted to an equivalent
+  HTML version with a table of contents and section headings. Use the
+  sample structured text, loaded with Control+F1, to compare the text
+  before, and HTML after, executing this command (it is also used in
+  preparing this documentation). The first line of text is assumed to
+  be the title of the resulting web page. Lines beginning with a web or
+  email address are converted to links.</p>
+
+  <p>The default line length before wrapping is about 80 characters. It
+  may be doubled to about 160 by maximizing the main TextPal window
+  (e.g., with Alt+Space followed by X). This window may be
+  automatically maximized at start up through the Settings command,
+  Alt+S. Another setting determines whether files from the last session
+  are re-opened.</p>
+
+  <p>Press Control+W to turn word wrap on, or Control+Shift+W to turn
+  it off. The setting is on at start up, but this can also be changed
+  with the Settings command, Alt+S. TextPal does not insert line break
+  characters at the ends of wrapped lines when saving a file. If a file
+  has line break characters at the ends of lines and you want them to
+  be word wrapped instead, use the Join Lines command, Control+Shift+J.
+  Lines will be wrapped from the cursor position to the next blank
+  line( defined by a pair of consecutive line breaks), or to the bottom
+  of the document if no blank line is found. If text is selected, the
+  included lines will be wrapped instead. A single blank space is
+  placed between joined lines. To perform the reverse operation, press
+  Control+Shift+H, which puts a hard line break at the end of each
+  line.</p>
+
+  <p>According to Windows conventions, a line break is denoted by a
+  carriage return (ASCII 13) followed by a line feed (ASCII 10). Use
+  the Export Format command, Alt+Shift+E, to save in either Macintosh
+  format, where a line break is denoted by a single carriage return, or
+  Unix format, where a line break is denoted by a single line feed.</p>
+
+  <p>Press Control+Q to quote text according to email conventions.
+  TextPal inserts a greater than sign followed by a space (&gt; ) at
+  the beginning of each line. Press Control+Shift+Q to remove such
+  quoting. TextPal operates on either the whole document or selected
+  text.</p>
+
+  <p>Use the Order Lines command, Alt+Shift+O, to sort lines in
+  alphabetical order (ignoring case). If text is selected, only lines
+  contained in the selection are sorted. Otherwise, all lines are
+  sorted. The Reverse Lines command, Alt+Shift+Z, flips either all
+  lines or those selected (you may associate Z with starting at the
+  bottom). To keep unique lines, press Alt+Shift+K. Identical lines in
+  either the whole file or selected text are removed (ignoring
+  case).</p>
+
+  <p>Press Alt+Shift+N to number all or selected lines. TextPal prompts
+  for the starting value, defaulting to the current line number. The
+  text on each affected line is then preceded by a consecutive number,
+  period symbol, and space character. With these commands, a line is
+  defined as text ending in a hard line break--the word wrap setting is
+  ignored.</p>
+
+  <p>Use the List Different Lines command, Alt+Shift+L, to create a
+  list based on a comparison of two lists: (1) lines above the current
+  line and (2) remaining lines. Lines in the first but not second list
+  are placed in a new editing window. If you want a list of lines in
+  the second but not first list, switch the order of the lists. Use the
+  Query Common Lines command, Alt+Shift+Q, to generate the set of lines
+  contained in both lists.</p>
+
+  <p>An email or web address is generally a chunk of text, since
+  intervening white space is not permitted. You can activate a URL by
+  placing the cursor anywhere within it, and then pressing Shift+F5,
+  the Run at Cursor command. You will be given a chance to review and
+  edit the text before it is used for execution. This can be useful,
+  for example, when an extraneous period character (.) follows the URL
+  at the end of a sentence. If text is selected before executing the
+  Run At Cursor command, that text will be used instead of the word at
+  the cursor position.</p>
+
+  <p>Press F7 to spellcheck the current document. If Microsoft Word is
+  found on the system, its spell checker is used. Otherwise, a free,
+  external utility is loaded with a dialog for changing words not found
+  in its dictionary. Although the dialog is accessible, it does not
+  have the same level of usability as the rest of TextPal because of
+  the lack of unique hot keys for each control.</p>
+
+  <p>Press Shift+F7 for a thesaurus lookup of the current word or
+  selected text. This only works if Microsoft Word is found. If it is
+  already open before using a spell check or thesaurus command from
+  TextPal, the appropriate tool will be activated more quickly.</p>
+
+  <p>A set of editing commands quickly transpose units of text: Swap
+  Character, F2, Swap Segment, Shift+F2, Swap Line, Control+F2, and
+  Swap Section, Alt+F2. The current line is considered to be divided
+  into two segments by the cursor position. These commands exchange the
+  current unit of text with the immediately preceding one.</p>
+
+  <p>Additional items on the File menu include the following. Use the
+  Path to Clipboard command, Alt+Shift+P, to copy the path and name of
+  the current file to the clipboard, making it easy to paste the full
+  name of a file into another application. Use the Path List command,
+  Control+Shift+P, to generate a list of files in the current folder. A
+  dialog lets you change this folder, which defaults to the location of
+  the last file opened or saved. The generated list is created in a new
+  editing window. The first file listed includes a leading path to
+  remind you of the source folder. Remaining files use names only.</p>
+
+  <p>Use the Rename command, Alt+Shift+R, to rename the current file.
+  It will be renamed both in the editor and on disk. Use the Delete
+  command, Alt+Shift+D, to delete the file from the editor and
+  disk.</p>
+
+  <p>Use the Mail command, Control+M, to start a mail message with the
+  file as the body text. For this to work, the file cannot be over
+  about 2K in size.</p>
+
+  <p>A screen reader user may have a habit of pressing the key to read
+  the current line to report the editing context. TextPal generally
+  says this information automatically after processing a command. You
+  may notice that TextPal does some operations more slowly than other
+  text editors. This is because it is written in a higher level
+  language (Ruby). The value of extra features is intended to outweigh
+  any noticeable speed differences. Moreover, if the time taken to
+  review results is included, even the same tasks are often more
+  efficient with TextPal.</p>
+
+  <p>Common mini dialogs of TextPal use titles that indicate the type
+  of action expected from you. A dialog that presents an edit box for
+  typing a single piece of information has the title &quot;Input,&quot;
+  e.g., the Forward Find command. The &quot;Fields&quot; dialog, on the
+  other hand, presents multiple edit boxes, e.g., the Replace command.
+  The &quot;Pick&quot; dialog asks you to select from a list box, e.g.,
+  the Recent Files command. The &quot;Confirm&quot; dialog asks for a
+  choice among Yes, No, and Cancel buttons.</p>
+
+  <p>The optional JAWS scripts support a command called Refresh JAWS
+  Text, JAWSKey+F5, which is intended for JAWS script developers when
+  an editing window contains a .jss, .jsd, or .jkm file. If a .jss file
+  (JAWS script source), TextPal will sort the routines alphabetically,
+  and place functions before scripts. Before issuing the command, you
+  should ensure that All Include and Use statements occur in a header
+  preceding the first function or script.</p>
+
+  <p>If a .jsd file (JAWS script dictionary), TextPal will generate a
+  new script dictionary based on the .jss file with the same base name.
+  Existing Synopsis and Description entries ar preserved, or if absent,
+  a comment line following a script or function declaration is
+  considered the synopsis, and immediately following comment lines are
+  considered the description.</p>
+
+  <p>If a .jkm file (JAWS key map), TextPal will sort the key
+  assignments alphabetically by script name. In all cases, TextPal
+  changes the text in the editor but not on disk, so you can review the
+  result before saving. Also, each refresh begins by making a copy of
+  the original file with .bak appended to the name.</p>
+
+  <p>To change screen reader settings specific to TextPal, change the
+  configuration file called &quot;WxRuby&quot; that will be associated
+  with this application. With JAWS, press JAWSKey+F2 and choose its
+  Configuration Manager from the list. With Window-Eyes, press
+  Control+BackSlash for its Control Panel. In either case, preserve
+  such changes with the Save command on the configuration File menu.
+  When working with files less than 50K in size, JAWS may read text
+  more reliably if &quot;Enhanced Edit Support&quot; is turned on--one
+  of its Text Processing settings. With JAWS 7.0 and above, setting the
+  &quot;caret blink rate&quot; under &quot;cursor options&quot; to a
+  value of 200 usually resolves problems with SayAll
+  (JAWSKey+DownArrow).</p>
+
+  <h1><a name="A12">Hot Key Summary</a></h1>
+
+  <p>Alphebetized by Command Name</p>
+
+  <p>About Alt+F1 Display TextPal version number and release date</p>
+
+  <p>Alternate Menu Alt+F10 Present all TextPal menu options in a
+  single, alphabetized list</p>
+
+  <p>ASCII Only Alt+Shift+a Eliminate characters with ASCII values
+  above 127 from all or selected text</p>
+
+  <p>Burn to CD Alt+Shift+b Burn list of files to CD</p>
+
+  <p>Change History Shift+F1 Display history of TextPal fixes,
+  modifications, and enhancements in a new window</p>
+
+  <p>Clear Bookmark Control+Shift+k Clear bookmark at cursor</p>
+
+  <p>Clear Favorite Control+Shift+l Clear current file from the list of
+  favorites</p>
+
+  <p>Close Window Control+F4 Close current editing window</p>
+
+  <p>Command Prompt Control+Backslash Open command prompt in folder of
+  current file</p>
+
+  <p>Compile Control+F5 Compile with tool, announce standard output,
+  and jump to error position, if any</p>
+
+  <p>Complete Selection Shift+F8 Select text from starting point to
+  cursor</p>
+
+  <p>Copy All Control+F8 Copy all text to clipboard</p>
+
+  <p>Copy Append Alt+c Append selected text to clipboard, or append
+  current line if no selection</p>
+
+  <p>Copy Snippet Alt+Shift+c Copy selected text to create a snippet
+  file on disk</p>
+
+  <p>Copy Control+c Copy selected text to clipboard, or copy current
+  line if no selection</p>
+
+  <p>Count with RegExp Control+Shift+C Count parts of text matching a
+  regular expression</p>
+
+  <p>Current Files F4 Activate an editing window from a list of those
+  currently open</p>
+
+  <p>Cut Append Alt+x Cut and append selected text to clipboard, or cut
+  and append current line if no selection</p>
+
+  <p>Cut Control+x Cut selected text to clipboard, or cut current line
+  if no selection</p>
+
+  <p>Delete All Control+Shift+F8 Delete all text in current editing
+  window</p>
+
+  <p>Delete Down Alt+/ or Alt+Shift+Delete Delete from cursor to bottom
+  of file</p>
+
+  <p>Delete Left Control+Shift+/ or Control+Shift+Backspace Delete from
+  cursor to start of line</p>
+
+  <p>Delete Line Control+d or Alt+Backspace Delete current line</p>
+
+  <p>Delete Paragraph Control+Shift+d Delete current paragraph</p>
+
+  <p>Delete Right Control+/ or Control+Shift+Delete Delete from cursor
+  to end of line</p>
+
+  <p>Delete Up Alt+Shift+/ or Alt+Shift+Backspace Delete from cursor to
+  top of file</p>
+
+  <p>Delete File Alt+Shift+d Delete current file from disk</p>
+
+  <p>Documentation F1 Open TextPal documentation in the default web
+  browser</p>
+
+  <p>Download Folder Alt+F11 Open the download folder in Windows
+  Explorer</p>
+
+  <p>Elevate Version F11 Download latest TextPal version and run
+  installer (after confirming)</p>
+
+  <p>End Character Alt+End Go to last non-blank character of current
+  line</p>
+
+  <p>Evaluate Expression Control+e or Control+Equals Evaluate
+  mathematical expression on current line or in selected text, and
+  put</p>
+
+  <p>Exit Alt+F4 Exit TextPal</p>
+
+  <p>Explorer Folder Alt+Backslash Open Windows Explorer in folder of
+  current file</p>
+
+  <p>Export Format Alt+Shift+e Export text to file in Macintosh or Unix
+  format</p>
+
+  <p>Extra Speech Log Alt+Shift+x Open speech.log file in new
+  window</p>
+
+  <p>Extra Speech Toggle Control+Shift+x Toggle extra speech messages
+  on or off, redirecting to speech.log file</p>
+
+  <p>Extract with RegExp Control+Shift+e Extract text matching a
+  regular expression, putting matches in a new window</p>
+
+  <p>File Find Alt+Shift+f Open file from list of files containing a
+  search string</p>
+
+  <p>Forward Again F3 Search forward for next match</p>
+
+  <p>Forward Find Control+f Search forward for string in all or
+  selected text</p>
+
+  <p>Forward Find Word Control+F3 Search forward for word at cursor or
+  selected text</p>
+
+  <p>Go to Again Alt+g Repeat Go to Percent command</p>
+
+  <p>Go to Bookmark Alt+k Go to next bookmark in current file</p>
+
+  <p>Go to Contents Shift+F6 Go from section in body to topic in table
+  of contents</p>
+
+  <p>Go to Percent Control+g Go to percentage point in file, or change
+  in percent from current position</p>
+
+  <p>Go to Section F6 Go to section in body from topic in table of
+  contents</p>
+
+  <p>Go to Start of Selection Alt+Shift+F8 Return to starting point of
+  selection</p>
+
+  <p>Grab URLs Alt+Shift+g Extract URLs from the HTML at a web
+  address</p>
+
+  <p>Hard Line Breaks Control+Shift+h Replace word wrapped line endings
+  with line break characters</p>
+
+  <p>Home Character Alt+Home Go to first non-blank character of current
+  line</p>
+
+  <p>Hot Key Summary Alt+Shift+h Display this list of command names,
+  hot keys, and descriptions in a new window</p>
+
+  <p>HTML Format Control+h Convert current file to HTML in a new
+  window</p>
+
+  <p>Indent Mode Toggle Alt+Shift+i Toggle on or off auto indent with
+  Enter, and announcement of indentation changes with up or down
+  arrow</p>
+
+  <p>Indent New Line Shift+Enter Start new line with same indentation
+  as current one</p>
+
+  <p>Indent Tab Indent current line or selected text by one level</p>
+
+  <p>Insert Script Path Control+I Insert JAWS script path in Open or
+  Save Dialog</p>
+
+  <p>Insert All Users Path Control+Shift+I Insert JAWS All Users path
+  in Open or Save Dialog</p>
+
+  <p>Insert Time Alt+Shift+; Insert current date and time according to
+  format setting</p>
+
+  <p>Invert Case Alt+Shift+u Convert current character or selected text
+  from lower to upper case, and vice versa</p>
+
+  <p>Join Lines Control+Shift+J Remove hard line breaks from all or
+  selected text</p>
+
+  <p>Jump Again Alt+j Repeat Jump to Line command</p>
+
+  <p>Jump to Error Alt+Shift+j Jump to line and column position of
+  error contained in last compiler output</p>
+
+  <p>Jump to Line Control+j Jump to line, or by change in number of
+  lines</p>
+
+  <p>Keep Unique Lines Alt+Shift+k Discard repetitive lines in all or
+  selected text</p>
+
+  <p>List Different Lines Alt+Shift+l Compare two lists and put
+  non-overlapping lines in a new window</p>
+
+  <p>List Favorites Alt+l Open a file from the list of favorites</p>
+
+  <p>Lower Case Control+Shift+u Convert current character or selected
+  text from upper to lower case</p>
+
+  <p>Mail Control+m Mail current file as body of an email message</p>
+
+  <p>Manual Settings Alt+Shift+m Open TextPal.ini settings file in a
+  new window for editing manually</p>
+
+  <p>Massage Operation Control+Shift+m Run a set of search and replace
+  tasks against one or more files</p>
+
+  <p>Match Left Brace Control+Shift+b Search backward for matching left
+  brace character</p>
+
+  <p>Match Right Brace Control+b Search forward for matching right
+  brace character</p>
+
+  <p>New from Clipboard Control+Shift+n Open a new editing window
+  containing clipboard text</p>
+
+  <p>New Control+n Open a new editing window</p>
+
+  <p>Next Block Control+I Go to the next block of code, defined by
+  reduced indentation</p>
+
+  <p>Next Chunk Alt+RightArrow Go to the next chunk of nonblank
+  characters</p>
+
+  <p>Next Paragraph F9 or Control+DownArrow Go to next paragraph</p>
+
+  <p>Next Part Alt+PageDown Go to next match of NavigatePart
+  setting</p>
+
+  <p>Next Section Control+PgDn Go to next section heading</p>
+
+  <p>Next Sentence Alt+DownArrow Go to next sentence</p>
+
+  <p>Next Window Control+Tab Cycle to next editing window</p>
+
+  <p>Number Lines Alt+Shift+n Number all or selected lines of text</p>
+
+  <p>Open Control+o Open a file from disk</p>
+
+  <p>Open Again Alt+o Refresh the current file from disk</p>
+
+  <p>Open without Convert Control+Shift+o Open file from disk without
+  trying to convert a non .txt extension</p>
+
+  <p>Order Lines Alt+Shift+o Sort all or selected lines of text</p>
+
+  <p>Outdent Shift+Tab Reduce indentation of current or selected lines
+  by one level</p>
+
+  <p>Paste File Control+Shift+v Insert file from disk into current
+  file</p>
+
+  <p>Paste Snippet Alt+Shift+v Insert content of a snippet file from a
+  list of those available</p>
+
+  <p>Paste Control+v Paste text from clipboard</p>
+
+  <p>Path List Control+Shift+p Put a list of files from the current
+  directory in a new window</p>
+
+  <p>Path to Clipboard Alt+Shift+p Copy full path of current file to
+  the clipboard</p>
+
+  <p>Pick Compiler Control+Shift+F5 Pick compiler, configuring
+  ToolCommand and ErrorPosition settings</p>
+
+  <p>Previous Block Control+Shift+I Go to previous block of code,
+  defined by reduced indentation</p>
+
+  <p>Previous Chunk Alt+LeftArrow Go to the next chunk of nonblank
+  characters</p>
+
+  <p>Previous Paragraph Shift+F9 or Control+UpArrow Go to previous
+  paragraph</p>
+
+  <p>Previous Part Alt+PageUp Go to previous match of NavigatePart
+  setting</p>
+
+  <p>Previous Section Control+PgUp Go to previous section heading</p>
+
+  <p>Previous Sentence Alt+UpArrow Go to previous sentence</p>
+
+  <p>Previous Window Control+Shift+Tab Cycle to previous editing
+  window</p>
+
+  <p>Print Control+p Print current file</p>
+
+  <p>Proper Case Alt+u Capitalize current character or first letter in
+  each word of selected text</p>
+
+  <p>Query Common Lines Alt+Shift+q Compare two lists and put
+  overlapping lines in a new window</p>
+
+  <p>Quote Control+q Prefix all or selected text with characters for
+  email quoting or program commenting</p>
+
+  <p>Recent Files Alt+r Open a file from the list of those recently
+  used</p>
+
+  <p>Redo Control+Shift+z Reverse an undo editing action</p>
+
+  <p>Refresh JAWS Text JAWSKey+F5 Refresh a .jss, jsd, or .jkm file</p>
+
+  <p>Rename Alt+Shift+r Rename current file on disk</p>
+
+  <p>Repeat Line Control+y Copy current line below it</p>
+
+  <p>Replace Control+r Search and replace string in all or selected
+  text</p>
+
+  <p>Replace with RegExp Control+Shift+r Search and replace regular
+  expression in all or selected text</p>
+
+  <p>Reverse Again Shift+F3 Search backward for previous match</p>
+
+  <p>Reverse Find Control+Shift+f Search backward for string</p>
+
+  <p>Reverse Find Word Control+Shift+F3 Search backward for word at
+  cursor or selected text</p>
+
+  <p>Reverse Lines Alt+Shift+z Reverse order of all or selected lines
+  of text</p>
+
+  <p>Run at Cursor Shift+F5 Execute a web URL or email address at
+  cursor or in selected text</p>
+
+  <p>Run with Prompt Alt+Shift+F5 Run external tool with prompt for
+  parameters, and display its standard output</p>
+
+  <p>Run with Tool Alt+F5 Run external tool, and display its standard
+  output</p>
+
+  <p>Run F5 Execute current file, based on its extension</p>
+
+  <p>Sample Folder Control+F11 Open the Sample folder in Windows
+  Explorer</p>
+
+  <p>Sample Massage Operation Control+Shift+F1 Display sample set of
+  search and replace tasks in a new window</p>
+
+  <p>Sample Structured Text Control+F1 Display sample table of contents
+  and corresponding sections in a new window</p>
+
+  <p>Save As Control+Shift+s Name and save current file to disk</p>
+
+  <p>Save Copy Alt+Shift+s Name and save copy of current file to
+  disk</p>
+
+  <p>Save Control+s Save current file to disk</p>
+
+  <p>Say Address Alt+a Say line, column, and percent position of
+  cursor</p>
+
+  <p>Say Braces Alt+b Say number of braces on either side of cursor</p>
+
+  <p>Say Chunk Shift+BackSpace Say contiguous sequence of non-blank
+  characters at cursor</p>
+
+  <p>Say Clipboard Alt+&#39; Say clipboard text</p>
+
+  <p>Say Indentation Alt+i Say indentation level of current line</p>
+
+  <p>Say Paragraph Alt+F9 or Control+NumPad5 Say current paragraph</p>
+
+  <p>Say Path Alt+p Say full path of current file</p>
+
+  <p>Say Selected Shift+Space Say selected text</p>
+
+  <p>Say Status Alt+z Say word wrap setting and whether current file
+  has been modified since last save to disk</p>
+
+  <p>Say Text Ahead Alt+Enter Say text ahead of cursor</p>
+
+  <p>Say Text All Alt+F8 Say all text</p>
+
+  <p>Say Text Prior Alt+Shift+Enter Say text prior to cursor</p>
+
+  <p>Say Time Alt+; Say current date and time according to format
+  setting</p>
+
+  <p>Say Topic Alt+t Say heading of current section</p>
+
+  <p>Say Widest Line Control+Shift+y Say number of characters in widest
+  line of all or selected text</p>
+
+  <p>Say Yield Alt+y Say number of bytes, words, and lines in all or
+  selected text</p>
+
+  <p>Section Break Control+Enter Insert sequence of characters as
+  divider between sections</p>
+
+  <p>Select All Control+a Select all text</p>
+
+  <p>Select Chunk Control+Space Select contiguous sequence of non-blank
+  characters at cursor</p>
+
+  <p>Set Bookmark Control+k Set bookmark at cursor position</p>
+
+  <p>Set Favorite Control+l Add current file to the list of
+  favorites</p>
+
+  <p>Settings Alt+s Invoke dialog to change TextPal configuration
+  settings</p>
+
+  <p>Speed Faster Control+Accent Increase JAWS voice speed by 5
+  percent</p>
+
+  <p>Speed Slower Control+Shift+Accent Decrease JAWS voice speed by 5
+  percent</p>
+
+  <p>Spellcheck F7 Spell check current file</p>
+
+  <p>Start Selection F8 Mark starting point of text to be selected</p>
+
+  <p>Swap Character F2 Swap current character with previous one</p>
+
+  <p>Swap Line Control+F2 Swap current line with previous one</p>
+
+  <p>Swap Section Alt+F2 Swap current section with previous one</p>
+
+  <p>Swap Segment Shift+F2 Swap current line segment (text from cursor
+  to end of line) with previous one</p>
+
+  <p>Text Combine Control+Shift+t Convert list of files to text and
+  combine them sequentially in a new editing window</p>
+
+  <p>Text Contents Alt+Shift+t Insert a table of contents that lists
+  section headings</p>
+
+  <p>Text Convert Control+t Convert list of files to text with same
+  name except for .txt extension</p>
+
+  <p>Text Convert with JAWS Control+JAWSKey+t Using Microsoft Office,
+  convert list of files to text with same name except for .txt
+  extension</p>
+
+  <p>Thesaurus Shift+F7 Replace word at cursor from a list of
+  synonyms</p>
+
+  <p>TogglePunctuation JAWSKey+Accent Toggle JAWS voice between all and
+  no punctuation</p>
+
+  <p>Topic Again Alt+F6 Repeat search for section heading</p>
+
+  <p>Topic Search Control+F6 Search section headings for a string</p>
+
+  <p>Trinm Blanks Control+Shift+Enter Trim leading and trailing blanks
+  from the current or selected lines, and remove more than two
+  consecutive blank lines</p>
+
+  <p>Undo Control+z Undo the last editing action</p>
+
+  <p>Unquote Control+Shift+q Remove from all or selected text the
+  leading characters for email quoting or program commenting</p>
+
+  <p>Unselect All Control+Shift+a Clear text selection</p>
+
+  <p>Upper Case Control+u Convert current character or selected text to
+  upper case</p>
+
+  <p>View Snippet Folder Alt+v Open the snippet folder in Windows
+  Explorer</p>
+
+  <p>Volume Louder Alt+Accent Increase JAWS voice volume by 5
+  percent</p>
+
+  <p>Volume Softer Alt+Shift+Accent Decrease JAWS voice volume by 5
+  percent</p>
+
+  <p>Web Download Alt+Shift+w Download a list of URLs to files in the
+  download subfolder</p>
+
+  <p>Word Wrap On Control+w Turn word wrap on</p>
+
+  <p>Word Wrap Off Control+Shift+w Turn word wrap off</p>
+
+  <h1><a name="A13">Development Notes</a></h1>
+
+  <p>For the technically curious, I developed TextPal with the Ruby
+  programming language from</p><a href=
+  "http://ruby-lang.org">http://ruby-lang.org</a><br>
+
+  <p>The user interface is managed with a library called WxWidgets,
+  available from</p><a href=
+  "http://WxWidgets.org">http://WxWidgets.org</a><br>
+
+  <p>I also make use of the AutoIt library from</p><a href=
+  "http://AutoItScript.com">http://AutoItScript.com</a><br>
+
+  <p>The PwrSpell library is from</p><a href=
+  "http://www.zcureit.com">http://www.zcureit.com</a><br>
+
+  <p>and the GetText utility is from</p><a href=
+  "http://www.kryltech.com">http://www.kryltech.com</a><br>
+
+  <p>with licenses in the files PwrSpell.txt and GetText.txt,
+  respectively, located in the TextPal program folder.</p>
+
+  <p>This folder contains the complete source code for TextPal in the
+  file TextPal.rbw (as well as in the utility files PwrSpell.bas,
+  AssocOn.bas, AssocOff.bas, and WebGet.bas).</p>
+
+  <p>The code is covered by a modified version of the GNU General
+  Public License (GPL), which is explained at</p><a href=
+  "http://gnu.org/copyleft/gpl.html">http://gnu.org/copyleft/gpl.html</a><br>
+
+  <p>Essentially, software that uses the code must be open source,
+  except that I am willing to relax GPL conditions in a particular case
+  if persuaded that a greater good would result.</p>
+
+  <p>The separate TextPal tutorial is a contribution by Jim Homme,
+  moderator of the blind programming list and web master of its host
+  site</p><a href=
+  "http://BlindProgramming.com">http://BlindProgramming.com</a><br>
+
+  <p>I welcome feedback, which helps TextPal improve over time. When
+  reporting a problem, the more specifics the better, including steps
+  to reproduce it, if possible.</p>
+
+  <p>The latest version of TextPal is available at the same
+  URL,</p><a href=
+  "http://www.EmpowermentZone.com/palsetup.exe">http://www.EmpowermentZone.com/palsetup.exe</a><br>
+
+  <p>This may be downloaded and installed with the Elevate Version
+  command, F11.</p>
+
+  <p>Jamal Mazrui</p>
+
+  <p>jamal@EmpowermentZone.com</p>
+</body>
+</html>
